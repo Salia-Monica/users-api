@@ -1,6 +1,8 @@
 const express = require("express");
-
 const usersRoute = require("./route/usersRoutes")
+const path = require("path");
+const req = require("express/lib/request");
+
 
 const app =express()
 
@@ -11,7 +13,12 @@ app.use(usersRoute)
 
 //home route
 app.get("/", (req, res)=>{
-    res.status(200).send("<h2>WELCOME TO THE USERS DATABASE</h2>");
+    res.sendFile(path.join(__dirname + "/pages/index.html"))
+})
+
+app.get("/*", (req, res)=>{
+    res.status(404).sendFile(path.join(__dirname + "/pages/404.html"))
+
 })
 
 
